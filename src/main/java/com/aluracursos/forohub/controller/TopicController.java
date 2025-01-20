@@ -3,6 +3,7 @@ package com.aluracursos.forohub.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,8 @@ public class TopicController {
   private TopicRepository topicRepository;
 
   @GetMapping
-  public Page<DataListTopic> listTopics(@PageableDefault(size = 2) Pageable pagination) {
+  public Page<DataListTopic> listTopics(
+      @PageableDefault(size = 10, page = 0, sort = "createdAt", direction = Sort.Direction.ASC) Pageable pagination) {
     return topicRepository.findAll(pagination).map(DataListTopic::new);
   }
 
