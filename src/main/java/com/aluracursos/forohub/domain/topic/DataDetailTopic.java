@@ -1,13 +1,14 @@
-package com.aluracursos.forohub.topic;
+package com.aluracursos.forohub.domain.topic;
 
 import java.time.Instant;
 
-public record DataListTopic(
+public record DataDetailTopic(
     Long id,
     String title,
     String message,
     Instant createdAt) {
-  public DataListTopic(Topic topic) {
+
+  public DataDetailTopic(Topic topic) {
     this(
         topic.getId(),
         topic.getTitle(),

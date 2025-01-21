@@ -1,4 +1,4 @@
-package com.aluracursos.forohub.topic;
+package com.aluracursos.forohub.domain.topic;
 
 import java.time.Instant;
 
