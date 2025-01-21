@@ -12,7 +12,7 @@ import jakarta.persistence.EntityNotFoundException;
 public class ControllerErrorHandler {
   // Error 404
   @ExceptionHandler(EntityNotFoundException.class)
-  public ResponseEntity handleEntityNotFound() {
+  public ResponseEntity<Void> handleEntityNotFound() {
     return ResponseEntity.notFound().build();
   }
 

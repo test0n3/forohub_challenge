@@ -25,6 +25,7 @@ public class Topic {
   private String title;
   private String message;
   private Instant createdAt;
+  private Boolean active;
 
   public Topic() {
   }
@@ -33,5 +34,18 @@ public class Topic {
     this.title = dataRegisterTopic.title();
     this.message = dataRegisterTopic.message();
     this.createdAt = Instant.now();
+  }
+
+  public void updateTopic(DataUpdateTopic dataUpdateTopic) {
+    if (dataUpdateTopic.title() != null) {
+      this.title = dataUpdateTopic.title();
+    }
+    if (dataUpdateTopic.message() != null) {
+      this.message = dataUpdateTopic.message();
+    }
+  }
+
+  public void deactivateTopic() {
+    this.active = false;
   }
 }
