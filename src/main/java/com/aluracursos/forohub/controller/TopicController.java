@@ -1,6 +1,7 @@
 package com.aluracursos.forohub.controller;
 
 import java.net.URI;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,11 +43,11 @@ public class TopicController {
 
   @GetMapping("/{id}")
   public ResponseEntity<DataDetailTopic> getTopicById(@PathVariable Long id) {
-    Topic topic = topicRepository.findByIdAndActiveTrue(id);
-    if (topic == null) {
+    Optional<Topic> topic = topicRepository.findByIdAndActiveTrue(id);
+    if (!topic.isPresent()) {
       return ResponseEntity.notFound().build();
     } else {
-      DataDetailTopic dataDetailTopic = new DataDetailTopic(topic);
+      DataDetailTopic dataDetailTopic = new DataDetailTopic(topic.get());
       return ResponseEntity.ok(dataDetailTopic);
     }
   }
@@ -64,14 +65,15 @@ public class TopicController {
   @PutMapping
   @Transactional
   public ResponseEntity<DataDetailTopic> updateTopic(@RequestBody @Valid DataUpdateTopic dataUpdateTopic) {
-    Topic topic = topicRepository.findByIdAndActiveTrue(dataUpdateTopic.id());
+    Optional<Topic> topic = topicRepository.findByIdAndActiveTrue(dataUpdateTopic.id());
 
-    if (topic == null) {
+    if (!topic.isPresent()) {
       return ResponseEntity.notFound().build();
     }
 
-    topic.updateTopic(dataUpdateTopic);
-    return ResponseEntity.ok(new DataDetailTopic(topic));
+    Topic topicFound = topic.get();
+    topicFound.updateTopic(dataUpdateTopic);
+    return ResponseEntity.ok(new DataDetailTopic(topicFound));
   }
 
   @DeleteMapping("/{id}")
