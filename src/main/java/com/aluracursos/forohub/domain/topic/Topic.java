@@ -33,6 +33,7 @@ public class Topic {
   public Topic(DataRegisterTopic dataRegisterTopic) {
     this.title = dataRegisterTopic.title();
     this.message = dataRegisterTopic.message();
+    this.active = true;
     this.createdAt = Instant.now();
   }
 
