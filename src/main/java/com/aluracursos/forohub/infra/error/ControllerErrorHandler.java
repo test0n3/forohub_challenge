@@ -1,4 +1,4 @@
-package com.aluracursos.forohub.infra;
+package com.aluracursos.forohub.infra.error;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
